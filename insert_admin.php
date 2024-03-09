@@ -1,6 +1,6 @@
 <?php
 
-require_once "konekcija.php";
+require_once "database/konekcija.php";
 
 $ime = "viktor";
 $lozinka = "VicoLol123";

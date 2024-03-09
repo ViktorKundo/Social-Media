@@ -11,15 +11,36 @@ session_start();
 </head>
 <body>
 <?php
-        $emailInput = $emailRepeatInput = $sifraInput = "";
+        //          REGISTRACIJA KORISNIKA
+        $emailInput = $usernameInput = $nameInput = $emailRepeatInput = $sifraInput = "";
         $tacno = false;
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $tacno = true;
-            $imeZaPrikaz = test_input($_POST["prikazIme"]);
+            $imeZaPrikaz = test_input($_POST["imePrikaz"]);
             $korisnickoIme = test_input($_POST["korisnickoIme"]);
-            $email = test_input($_POST["email"]);
             $sifra = test_input($_POST["sifra"]);
+            $email = test_input($_POST["email"]);
             $emailRepeat = test_input($_POST["emailR"]);
+            if(empty($_POST["imePrikaz"])){
+                $nameInput = "Morate uneti ime za prikaz";
+                $tacno = false;
+            }
+            if(empty($_POST["korisnickoIme"])){
+                $usernameInput = "Morate uneti korisnicko ime";
+                $tacno = false;
+            } else{
+                require_once "../database/konekcija.php";
+                $sql = "SELECT korisnicko_ime FROM korisnici";
+                $results = $conn->query($sql);
+                if($results->num_rows > 0){
+                    while($row = $results->fetch_assoc()){
+                        if($row["korisnicko_ime"] == $korisnickoIme){
+                            $usernameInput = "Morate uneti drugo korisnicko ime";
+                            $tacno = false;
+                        }
+                    }
+                }
+            }
             if(empty($_POST["email"])){
                 $emailInput = "Morate uneti email";
                 $tacno = false;
@@ -75,17 +96,21 @@ session_start();
     </form>
     <?php
         if($tacno){
-            include "konekcija.php";
+
+            //UNOS PODATAKA U BAZU
+
+            include "database/konekcija.php";
             $hashSifra = password_hash($sifra, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO korisnici (email, sifra)
-            VALUES ('$email', '$hashSifra');";
-            if($conn->query($sql) === TRUE){
-                echo "Uspesno insertovane vrednosti";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-            $conn->close();
-            header("Location: index.php");
+            $sql = "INSERT INTO korisnici (korisnicko_ime, ime_za_prikaz, email, lozinka)
+            VALUES (?, ?, ?, ?);";
+            $run = $conn->prepare($sql);
+            $run -> bind_param("ssss",$korisnickoIme,$imeZaPrikaz,$email,$hashSifra);
+
+            $run->execute();
+            $_SESSION['email'] = $email;
+            $_SESSION["ime_prikaz"] = $imeZaPrikaz;
+            $_SESSION["uspešna_registracija"] = "Uspešno ste se registrovali!";
+            header("Location: ../index.php");
         }
     ?>
 </body>

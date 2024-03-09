@@ -12,23 +12,23 @@ session_start();
 </head>
 <body>
     <?php
-    if(!isset($_SESSION['email'])){
+    if(!isset($_SESSION['email']) && !isset($_SESSION['adminIme'])){
          
-        echo '<a href="registracija.php">Registracija</a><br>';
-        echo '<a href="prijava.php">Prijava</a><br>';
-        echo '<a href="prijava_admin.php">Prijava kao admin</a>';
+        echo '<a href="pages/registracija.php">Registracija</a><br>';
+        echo '<a href="pages/prijava_korisnik.php">Prijava</a><br>';
+        echo '<a href="pages/prijava_admin.php">Prijava kao admin</a>';
     }
     else{
         $email = $_SESSION["email"];
+        $prikazIme = $_SESSION["ime_prikaz"];
         
         echo '
         <p>
-            Dobro dosao '.$email.'
+            Dobro dosao '.$prikazIme.'
         </p>
 
-        <h4><a href = "tema.php">Kreiraj temu</a></h4>
 
-        <a href="logout.php"><button>
+        <a href="utils/logout.php"><button>
             Logout
         </button></a>
         
@@ -39,16 +39,17 @@ session_start();
     ?>
     <div> 
     <?php 
-            include "konekcija.php";
-            $sql = "SELECT id,naslov,opis FROM teme";
+            include "database/konekcija.php";
+            $sql = "SELECT id_teme,naslov,opis FROM teme";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
             
             while($row = $result->fetch_assoc()) {
-                $id = $row["id"];
+                $idTeme = $row["id_teme"];
+                $_SESSION["id_teme"] = $idTeme;
                 echo "
-                    <a href = 'tema_prikaz.php?id=".$id.".php'><h3>
+                    <a href = 'pages/tema.php?id=".$idTeme.".php'><h3>
                     ".$row["naslov"]."
                     </h3></a>
                     <p>

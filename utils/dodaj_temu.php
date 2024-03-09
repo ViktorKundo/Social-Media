@@ -12,7 +12,7 @@ $adminIme = $_SESSION["adminIme"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        require_once "konekcija.php";
+        require_once "../database/konekcija.php";
 
         $naslov = test_input($_POST["naslov"]);
         $opis = test_input($_POST["opis"]);
@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($opis == null){
             $_SESSION["errorUnosTeme"] = "Morate uneti opis";
             $conn->close();
-            header("location: admin_dashboard.php");
+            header("location: ../pages/admin_dashboard.php");
             exit();
         }
 
@@ -36,6 +36,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $run->execute();
         
         $_SESSION["Uspešan_unos"] = "Uspešno ste dodali novu temu";
+
+        header("location: ../pages/admin_dashboard.php");
     }
     function test_input($data) {
         $data = trim($data);

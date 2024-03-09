@@ -1,4 +1,3 @@
-VicoLol123
 <?php
     session_start();
     if(isset($_SESSION["adminIme"])){
@@ -7,7 +6,7 @@ VicoLol123
     
     $imeInput = $sifraInput = "";
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        require_once "konekcija.php";
+        require_once "../database/konekcija.php";
         
         $ime = test_input($_POST["ime"]);
         $sifra = test_input($_POST["sifra"]);
