@@ -8,10 +8,12 @@
 
     if ($results->num_rows > 0)
     while($row = $results->fetch_assoc()) {
+
+        $id_diskusije = $row["id"];
         echo "
-            <h3>
+            <h3><a href = '../pages/diskusija.php?id_diskusije=$id_diskusije'>
             ".$row["naslov"]."
-            </h3
+            </a></h3>
             <p>
             ".$row["text"]."
             </p>
@@ -22,8 +24,15 @@
             ".$row["kreirana"]."
             </p>
         ";
+
+
         
+        
+    }
+    else{
+        echo "Nema diskusija";
     }
     $conn->close();
 
     ?>
+    <script></script>

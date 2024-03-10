@@ -28,8 +28,9 @@ $email_set = "";
         require_once "../components/tema_prikaz.php";
 
         if($email_set == "ulogovan"){
-            if($_SESSION["errorUnosDiskusije"]){
+            if(isset($_SESSION["errorUnosDiskusije"])){
                 echo"$_SESSION[errorUnosDiskusije]";
+                unset($_SESSION["errorUnosDiskusije"]);
             }
             echo "<p>Dodaj diskusiju</p>";
             echo '
