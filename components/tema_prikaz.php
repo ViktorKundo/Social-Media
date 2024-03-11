@@ -9,24 +9,15 @@
     if ($results->num_rows > 0)
     while($row = $results->fetch_assoc()) {
 
-        $id_diskusije = $row["id"];
+        $idDiskusije = $row["id"];
         echo "
-            <h3><a href = '../pages/diskusija.php?id_diskusije=$id_diskusije'>
+            <h3><a href = '../pages/diskusija.php?id_diskusije=$idDiskusije'>
             ".$row["naslov"]."
             </a></h3>
             <p>
             ".$row["text"]."
             </p>
-            <p>
-            ".$row["korisnicko_ime"]."
-            </p>
-            <p>
-            ".$row["kreirana"]."
-            </p>
         ";
-
-
-        
         
     }
     else{

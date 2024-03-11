@@ -1,3 +1,10 @@
 #dodajKomentar{
     display: none;
 }
+
+.formaOdgovori{
+    display: none;
+}
+.aktivnaForma{
+    display: block;
+}

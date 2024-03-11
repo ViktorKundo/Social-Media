@@ -29,24 +29,28 @@
     <body>
         <?php
 
+            require_once "../components/diskusija_prikaz.php";
+
             if($email_set === "ulogovan")
             echo'<button onclick="prikazi()">Dodaj komentar</button>';
             echo'<div id = "dodajKomentar">
                     <form action="../utils/dodaj_komentar.php" method="post">
                         <label>Text: </label>
-                        <input type = "text" name = "tekst"></input><br>
+                        <textarea name = "tekst"></textarea><br>
                         <input type = "submit" value = "Dodaj komentar"></input>
                     </form>
                 </div>';
 
             require_once "../database/konekcija.php";
 
-            $sql = "SELECT * FROM komentari WHERE id_diskusije = $id_diskusije";
+            $sql = "SELECT * FROM komentari WHERE id_diskusije = $idDiskusije";
             $results = $conn->query($sql);
 
             if ($results->num_rows > 0)
             while($row = $results->fetch_assoc()) {
+        // NAPRAVI SESIJU ZA KOMENTAR I TO ŠALJI NA FORMU ZA ODGOVORE
                 echo "
+                <div onclick = 'odgovori(event)'>   
                     <h3>
                     ".$row["tekst"]."
                     </h3>
@@ -56,10 +60,16 @@
                     <p>
                     ".$row["kreiran"]."
                     </p>
+                    <form class='formaOdgovori' action = '../utils/odgovori.php' method = 'POST' >
+                        <textarea name = 'tekst'></textarea><br>
+                        <input type = 'submit' value = 'Odgovori' ></input>
+                    </form>
+                </div>
+                <hr>
                 ";
             }
-        ?>
-        <script src="../scripts/dodaj_komentar.js">
+            ?>
+        <script src="../scripts/komentar.js">
         
         </script>
     </body>

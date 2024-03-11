@@ -25,12 +25,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO komentari(tekst, korisnicko_ime, id_diskusije) VALUES (?,?,?)";
         
         $run = $conn->prepare($sql);
-        $run -> bind_param("sis",$tekst,$idDiskusije,$korisnickoIme);
+        $run -> bind_param("ssi", $tekst, $korisnickoIme, $idDiskusije);
         $run -> execute();
         
         $_SESSION["Uspešan_unos"] = "Uspešno ste dodali novi komentar";
 
-        header("location: ../pages/diskusija.php?id=$idDiskusije.php");
+        header("location: ../pages/diskusija.php?id=$idDiskusije");
     }
     function test_input($data) {
         $data = trim($data);

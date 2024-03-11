@@ -49,7 +49,7 @@ session_start();
                 $idTeme = $row["id_teme"];
                 $_SESSION["id_teme"] = $idTeme;
                 echo "
-                    <a href = 'pages/tema.php?id=".$idTeme.".php'><h3>
+                    <a href = 'pages/tema.php?id=$idTeme'><h3>
                     ".$row["naslov"]."
                     </h3></a>
                     <p>
