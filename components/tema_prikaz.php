@@ -3,7 +3,7 @@
     
     //Ovaj kod se koristi za prikaz svih diskusija na stranici tema
     
-    $sql = "SELECT * FROM diskusije WHERE id_teme ='".$idTeme."'";
+    $sql = "SELECT * FROM diskusije WHERE id_teme LIKE $idTeme";
     $results = $conn->query($sql);
 
     if ($results->num_rows > 0)

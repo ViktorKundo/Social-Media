@@ -1,3 +1,74 @@
+body{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  width: 100%;
+  height: inherit;
+  min-height: 100%;
+  background-color: #07080D;
+  color: #6BC79F;
+  font-size: 14px;
+  font-family:  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  font-feature-settings: 'tnum', "tnum";
+
+}
+#root{
+  
+}
+.layout{
+display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  height: 100%;
+  background-color: #07080D;
+  --header-color: #1D2029;
+  --search-bar-bg-color: #434343;
+  --search-bar-font-color: #8C8C8C;
+  --link-color: #87C2F8;
+  --pdb-bg-color-1: #07080D;
+  --pdb-bg-color-2: #15171F;
+  --pdb-bg-color-3: #1D2029;
+  --pdb-bg-color-4: #112C20;
+  --pdb-bg-color-5: #225941;
+  --pdb-bg-color-6: #328561;
+  --pdb-bg-color-7: #43B282;
+  --pdb-bg-color-8: #6BC79F;
+  --pdb-bg-color-9: #7ECEAB;
+  --pdb-bg-color-10: #A6DDC5;
+  --pdb-bg-color-11: #C4E9D9;
+  --pdb-bg-color-12: #E1F4EC;
+  --orange_1: #FCEBE8;
+  --orange_2: #FFC9A3;
+  --orange_3: #FA9D64;
+  --orange_4: #FF905C;
+  --orange_5: #EB7B45;
+  --sematic_link: #87C2F8;
+  --sematic_success: #6BC79F;
+  --sematic_error: #EB5C52;
+  --sematic_warning: #F7A863;
+  --white-75: #BFBFBF;
+  --white-55: #8C8C8C;
+}
+nav{
+    background-color:#1D2029;
+}
+.nav-link{
+    color: #328561;
+}
+main{
+    max-width: 832px;
+  padding-top: 20px;
+  margin: 0 auto !important;
+}
+.navbar-nav{
+    margin-left: 60px;
+}
+p{
+    color: #6BC79F;
+}
 #dodajKomentar{
     display: none;
 }
@@ -8,3 +79,21 @@
 .aktivnaForma{
     display: block;
 }
+.odgovor{
+    margin-left: 60px;
+
+}
+.slikaTema{
+    width: 100px;
+    height: 100px;
+}
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(122, 203, 178), rgb(20, 115, 66));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(122, 203, 178), rgba(20, 115, 66))
+    }

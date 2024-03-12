@@ -3,7 +3,7 @@ function prikazi(){
 }
 
 function odgovori(event){
-    var komentar = event.currentTarget;
+    var komentar = event.currentTarget.parentElement;
     var odgovoriForma = komentar.getElementsByTagName('form')[0];
     if(odgovoriForma.classList.contains('formaOdgovori')){
        odgovoriForma.classList.remove('formaOdgovori');

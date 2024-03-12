@@ -28,16 +28,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             header("location: ../pages/admin_dashboard.php");
             exit();
         }
+        if(isset($_FILES["putanjaSlike"]) && $_FILES["putanjaSlike"]["error"] == 0){
+            $filename = $_FILES["putanjaSlike"]["name"];
 
-        $sql = "INSERT INTO teme (naslov, opis, ime_admina) VALUES (?,?,?)";
-        
-        $run = $conn->prepare($sql);
-        $run -> bind_param("sss",$naslov,$opis,$adminIme);
-        $run->execute();
-        
-        $_SESSION["Uspešan_unos"] = "Uspešno ste dodali novu temu";
+            if(file_exists("../images/" . $filename)){
+                echo $filename . " vec postoji";
+            } else{
+                if(move_uploaded_file($_FILES["putanjaSlike"]["tmp_name"], "../images/" . $filename)){
+                    $filename = "/images/" . $filename;
 
-        header("location: ../pages/admin_dashboard.php");
+                    $sql = "INSERT INTO teme (naslov, opis, putanjaSlike, ime_admina) VALUES (?,?,?,?)";
+                    
+                    $run = $conn->prepare($sql);
+                    $run -> bind_param("ssss",$naslov,$opis,$filename,$adminIme);
+                    $run->execute();
+                    
+                    $_SESSION["Uspešan_unos"] = "Uspešno ste dodali novu temu";
+            
+                    header("location: ../pages/admin_dashboard.php");
+                }
+            }
+        }
     }
     function test_input($data) {
         $data = trim($data);

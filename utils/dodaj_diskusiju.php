@@ -31,15 +31,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $sql = "INSERT INTO diskusije(naslov, text, id_teme, korisnicko_ime) VALUES (?,?,?,?)";
-        
-        $run = $conn->prepare($sql);
-        $run -> bind_param("ssis",$naslov,$text,$idTeme,$korisnickoIme);
-        $run->execute();
-        
-        $_SESSION["Uspešan_unos"] = "Uspešno ste dodali novu diskusiju";
+        if(isset($_FILES["putanjaSlike"]) && $_FILES["putanjaSlike"]["error"] == 0){
+            $filename = $_FILES["putanjaSlike"]["name"];
 
-        header("location: ../pages/tema.php?id=$idTeme.php");
+            if(file_exists("../images/" . $filename)){
+                echo $filename . " vec postoji";
+            } else{
+                if(move_uploaded_file($_FILES["putanjaSlike"]["tmp_name"], "../images/" . $filename)){
+                    $filename = "/images/" . $filename;
+
+                    $sql = "INSERT INTO diskusije(naslov, text, putanjaSlike, id_teme, korisnicko_ime) VALUES (?,?,?,?,?)";
+                    
+                    $run = $conn->prepare($sql);
+                    $run -> bind_param("sssis",$naslov,$text,$filename,$idTeme,$korisnickoIme);
+                    $run->execute();
+                    
+                    $_SESSION["Uspešan_unos"] = "Uspešno ste dodali novu diskusiju";
+
+                    header("location: ../pages/tema.php?id=$idTeme.php");
+                }
+            }
+        }
     }
     function test_input($data) {
         $data = trim($data);

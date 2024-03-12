@@ -7,61 +7,56 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pocetna</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="./css/style.css" type="text/css">
+
 </head>
 <body>
-    <?php
-    if(!isset($_SESSION['email']) && !isset($_SESSION['adminIme'])){
-         
-        echo '<a href="pages/registracija.php">Registracija</a><br>';
-        echo '<a href="pages/prijava_korisnik.php">Prijava</a><br>';
-        echo '<a href="pages/prijava_admin.php">Prijava kao admin</a>';
-    }
-    else{
-        $email = $_SESSION["email"];
-        $prikazIme = $_SESSION["ime_prikaz"];
-        
-        echo '
-        <p>
-            Dobro dosao '.$prikazIme.'
-        </p>
+    <div id="root">
+        <?php
+        require_once "components/navbar_index.php";
+        ?>
+        <main>
+            <div class="container">
+                <div class="row align-items-center  border border-success">
 
-
-        <a href="utils/logout.php"><button>
-            Logout
-        </button></a>
-        
-        ';
-        
-    }
-    
-    ?>
-    <div> 
-    <?php 
-            include "database/konekcija.php";
-            $sql = "SELECT id_teme,naslov,opis FROM teme";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
+                    <?php 
+                    include "database/konekcija.php";
+                    $sql = "SELECT * FROM teme";
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        
+                        while($row = $result->fetch_assoc()) {
+                            $idTeme = $row["id_teme"];
+                            $_SESSION["id_teme"] = $idTeme;
+                            echo "
+                            <div class='col-md-2 col-sm-3 '>
+                                <img class='slikaTema' src=".$row["putanjaSlike"].">
+                            </div>
+                            <div class='col-md-4 col-sm-7 '>
+                                <a href = 'pages/tema.php?id_teme=$idTeme'><h3>
+                                ".$row["naslov"]."
+                                </h3></a>
+                                <p>
+                                ".substr($row["opis"],0,80)."...
+                                </p><hr><br>
+                            </div>";
+                        }
+                    } else {
+                        echo "<h4>Nema tema</h4>";
+                    }
+                    $conn->close();
+                ?>
             
-            while($row = $result->fetch_assoc()) {
-                $idTeme = $row["id_teme"];
-                $_SESSION["id_teme"] = $idTeme;
-                echo "
-                    <a href = 'pages/tema.php?id=$idTeme'><h3>
-                    ".$row["naslov"]."
-                    </h3></a>
-                    <p>
-                    ".$row["opis"]."
-                    </p><hr><br>
-                ";
-            }
-            } else {
-            echo "<h4>Nema tema</h4>";
-            }
-            $conn->close();
-    ?>
-    </div>
+                </div>            
+            </div>
+        </main> 
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 </html>
