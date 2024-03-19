@@ -24,21 +24,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tema</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital@0;1&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	    <link rel="stylesheet" href="../css/style.css" type="text/css">
     </head>
     <body>
+            
         <?php
+
+            require_once "../components/navbar.php";
 
             require_once "../components/diskusija_prikaz.php";
 
             if($email_set === "ulogovan")
-            echo'<button onclick="prikazi()">Dodaj komentar</button>';
+            echo'<h5 class="ms-5 mt-5" onclick="prikazi()">Nov komentar</h5>';
             echo'<div id = "dodajKomentar">
                     <form action="../utils/dodaj_komentar.php" method="post">
-                        <label>Text: </label>
                         <textarea name = "tekst"></textarea><br>
-                        <input type = "submit" value = "Dodaj komentar"></input>
+                        <button class="btn btn-outline-success btn-lg px-5" type="submit">Dodaj komentar</button>
                     </form>
                 </div>';
 
@@ -51,12 +57,12 @@
             while($row = $results->fetch_assoc()) {
                 $id = $row["id"];
                 echo "
-                <div >   
+                <div class='ms-5'>   
                     <h3>
-                    ".$row["tekst"]."
+                        ".$row["tekst"]."
                     </h3>
                     <p>
-                    ".$row["korisnicko_ime"]."
+                        Kreator: ".$row["korisnicko_ime"]."
                     </p>
                     <p>
                     ".$row["kreiran"]."
@@ -77,11 +83,11 @@
                     while($row = $results2->fetch_assoc()) {
                         echo "
                         <div class='odgovor'>
-                            <h3>
+                            <h6>
                             ".$row["tekst"]."
-                            </h3>
+                            </h6>
                             <p>
-                            ".$row["korisnicko_ime"]."
+                                Kreator:".$row["korisnicko_ime"]."
                             </p>
                         </div>";
                     }
@@ -90,6 +96,9 @@
                 ";
             }
             ?>
+            </div>
+    </div>
+            </main>
             
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

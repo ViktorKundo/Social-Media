@@ -8,11 +8,8 @@ body{
   min-height: 100%;
   background-color: #07080D;
   color: #6BC79F;
-  font-size: 14px;
-  font-family:  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  font-variant: tabular-nums;
+  font-family: 'Montserrat';    
   line-height: 1.5715;
-  font-feature-settings: 'tnum', "tnum";
 
 }
 #root{
@@ -54,20 +51,30 @@ display: flex;
 }
 nav{
     background-color:#1D2029;
+    font-family: 'Raleway';    
+    font-size: 25px;
 }
 .nav-link{
     color: #328561;
-}
-main{
-    max-width: 832px;
-  padding-top: 20px;
-  margin: 0 auto !important;
+    font-family: 'Raleway';
 }
 .navbar-nav{
     margin-left: 60px;
 }
+section {
+    letter-spacing: 1px;
+    font-size: 25px;
+}
+main{
+    max-width: 1440px;
+  padding-top: 20px;
+  margin: 0 auto !important;
+}
 p{
     color: #6BC79F;
+}
+#dodajDiskusiju{
+    display: none;
 }
 #dodajKomentar{
     display: none;
@@ -84,8 +91,20 @@ p{
 
 }
 .slikaTema{
-    width: 100px;
-    height: 100px;
+    width: 125px;
+    height: 125px;
+}
+.slikaTema-d{
+    width: 300px;
+    height: 300px;
+}
+.slikaDiskusija{
+    width: 180px;
+    height: 180px;
+}
+.slikaDiskusija-d{
+    max-width: 700px;
+    max-height: 700px;
 }
 .gradient-custom {
     /* fallback for old browsers */

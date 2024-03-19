@@ -1,5 +1,8 @@
 function prikazi(){
+    if(document.getElementById("dodajKomentar").style.display = "none")
     document.getElementById("dodajKomentar").style.display = "flex";
+    else
+    document.getElementById("dodajKomentar").style.display = "none";
 }
 
 function odgovori(event){

@@ -5,15 +5,15 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item ms-5">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#Teme">Teme</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
+                        Nalog
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php
@@ -41,13 +41,13 @@
             </ul>
             <?php
                 if(!isset($_SESSION['email']) && !isset($_SESSION['adminIme'])){
-                    echo '<div class="d-flex w-auto ">
+                    echo '<div class="d-flex w-auto me-5">
                             <a class="nav-link " href="../pages/prijava_korisnik.php">Nisi ulogovan</a>
                         </div>';
 
                 }
                 else {
-                    echo '<div class="d-flex w-auto ">
+                    echo '<div class="d-flex w-auto me-5">
                             <p class="nav-link">Dobro dosao   '. $prikazIme.'</p>
                         </div>';
                 }
